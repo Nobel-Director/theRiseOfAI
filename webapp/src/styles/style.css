@@ -1,0 +1,25 @@
+@import url("reset.css");
+
+.box {
+  display: inline-flex;
+  align-items: center;
+}
+
+.cell {
+  border: 1px solid black;
+  height: 4rem;
+  width: 4rem;
+
+  /* background-image: linear-gradient(
+    to bottom left,
+    transparent 45%,
+    #fff,
+    transparent 54%
+  ); */
+
+  text-align: center;
+}
+
+.cell:hover {
+  backdrop-filter: blur(5px);
+}
