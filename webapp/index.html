@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/styles/style.css">
+    <title>Мой сайт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav {
+            background: #444;
+            padding: 0.5rem;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 0;
+        }
+
+        .block {
+            width: 100%;
+            padding: 2rem;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .block:nth-child(odd) {
+            background: #f4f4f4;
+        }
+
+        .block:nth-child(even) {
+            background: #ddd;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Добро пожаловать!</h1>
+    </header>
+    <nav>
+        <a href="#">Главная</a>
+        <a href="#">О нас</a>
+        <a href="#">Контакты</a>
+    </nav>
+    <main>
+        <div class="block">
+            <h2>Блок 1</h2>
+            <p>Содержимое первого блока.</p>
+        </div>
+        <div class="block">
+            <h2>Блок 2</h2>
+            <p>Содержимое второго блока.</p>
+        </div>
+        <div class="block_3">
+            <h2 class="block_3-h2">Блок 3</h2>
+            <!-- <p>Содержимое третьего блока.</p> -->
+            <div class="keys">
+                <div data-key="65" class="key">
+                    <kbd>A</kbd>
+                    <span class="sound">ХЛОП</span>
+                </div>
+                <div data-key="83" class="key">
+                    <kbd>S</kbd>
+                    <span class="sound">ТЫНЦ</span>
+                </div>
+                <div data-key="68" class="key">
+                    <kbd>D</kbd>
+                    <span class="sound">БУМ</span>
+                </div>
+                <div data-key="70" class="key">
+                    <kbd>F</kbd>
+                    <span class="sound">БАМ</span>
+                </div>
+                <div data-key="71" class="key">
+                    <kbd>G</kbd>
+                    <span class="sound">БУМ 2</span>
+                </div>
+                <div data-key="72" class="key">
+                    <kbd>H</kbd>
+                    <span class="sound">КЛАЦ</span>
+                </div>
+                <div data-key="74" class="key">
+                    <kbd>J</kbd>
+                    <span class="sound">ТЫЦ</span>
+                </div>
+                <div data-key="75" class="key">
+                    <kbd>K</kbd>
+                    <span class="sound">БУХ</span>
+                </div>
+                <div data-key="76" class="key">
+                    <kbd>L</kbd>
+                    <span class="sound">ТЫНК</span>
+                </div>
+            </div>
+            <audio data-key="65" src="audio/clap.wav"></audio>
+            <audio data-key="83" src="audio/hihat.wav"></audio>
+            <audio data-key="68" src="audio/kick.wav"></audio>
+            <audio data-key="70" src="audio/openhat.wav"></audio>
+            <audio data-key="71" src="audio/boom.wav"></audio>
+            <audio data-key="72" src="audio/ride.wav"></audio>
+            <audio data-key="74" src="audio/snare.wav"></audio>
+            <audio data-key="75" src="audio/tom.wav"></audio>
+            <audio data-key="76" src="audio/tink.wav"></audio>
+        </div>
+        <div class="block">
+            <h2>Блок 4</h2>
+            <p>Содержимое четвёртого блока.</p>
+        </div>
+        <div class="block">
+            <h2>Блок 5</h2>
+            <p>Содержимое пятого блока.</p>
+        </div>
+        <div class="block">
+            <h2>Блок 6</h2>
+            <p>Содержимое шестого блока.</p>
+            <div class="box">
+
+                <div class="box_row">
+                    <div class="cell" id="0">1</div>
+                    <div class="cell" id="1">2</div>
+                    <div class="cell" id="2">3</div>
+                </div>
+
+                <div class="box_row">
+                    <div class="cell" id="3">4</div>
+                    <div class="cell" id="4">5</div>
+                    <div class="cell" id="5">6</div>
+                </div>
+
+                <div class="box_row">
+                    <div class="cell" id="6">7</div>
+                    <div class="cell" id="7">8</div>
+                    <div class="cell" id="8">9</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Мой сайт
+    </footer>
+    <script>
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            e.target.classList.remove('playing');
+        }
+
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+
+            key.classList.add('playing');
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+        window.addEventListener('keydown', playSound);
+    </script>
+    <script src="./src/main.js" type="module"></script>
+</body>
+
+</html>
